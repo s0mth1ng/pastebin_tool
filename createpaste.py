@@ -13,7 +13,7 @@ def get_args():
     parser.add_argument("--format", "-f", metavar="fileformat", nargs='?',
                         help="File format used in code highlighting.", default=None)
     parser.add_argument("--expire", "-e", metavar="expiration", nargs='?',
-                        help="Time before paste will be deleted. (default: 'Never')", default='10M')
+                        help="Time before paste will be deleted. (default: '1 day')", default='1D')
     args = parser.parse_args()
     return args
 
