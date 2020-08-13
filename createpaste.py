@@ -28,7 +28,12 @@ if __name__ == '__main__':
         'api_paste_format': args.format,
         'api_paste_expire_date': args.expire
     }
-    response = requests.post(API_URL, data=request_data)
+    try:
+        response = requests.post(API_URL, data=request_data)
+    except requests.exceptions.RequestException as e:
+        raise SystemExit(e)
+    if 'Bad API request' in response.text:
+        raise SystemExit(requests.exceptions.RequestException(response.text))
     paste_url = response.text
     pyperclip.copy(paste_url)
     print(f'Paste created!\nLink: {paste_url}\nCopied to clipboard!')
